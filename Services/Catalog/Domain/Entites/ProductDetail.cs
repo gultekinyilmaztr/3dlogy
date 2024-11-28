@@ -1,8 +1,9 @@
-﻿namespace Domain.Entites
+﻿using Application.Services.Repositories;
+
+namespace Domain.Entites
 {
-    public class ProductDetail
+    public class ProductDetail : BaseEntity<ProductDetail>
     {
-        public int ProductDetailId { get; set; }
         public string Title { get; set; }
         public List<string> Pictures { get; set; }
         public string Description { get; set; }

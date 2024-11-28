@@ -1,8 +1,9 @@
-﻿namespace Domain.Entites
+﻿using Application.Services.Repositories;
+
+namespace Domain.Entites
 {
-    public class SubCategory
+    public class SubCategory : BaseEntity<SubCategory>
     {
-        public int SubCategoryId { get; set; }
         public string SubCategoryName { get; set; }
         public string PhotoUrl { get; set; }
         public string IconUrl { get; set; }
