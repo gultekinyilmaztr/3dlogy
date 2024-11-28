@@ -7,7 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Base.Persistence\Base.Persistence.csproj" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.0" />
+    <PackageReference Include="System.Linq.Dynamic.Core" Version="1.4.9" />
   </ItemGroup>
 
 </Project>

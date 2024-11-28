@@ -1,8 +1,8 @@
-﻿using Application.Services.Repositories;
+﻿using Base.Persistence.Services.Repositories;
 
 namespace Domain.Entites
 {
-    public class SubCategory : BaseEntity<SubCategory>
+    public class SubCategory : BaseEntity<Guid>
     {
         public string SubCategoryName { get; set; }
         public string PhotoUrl { get; set; }

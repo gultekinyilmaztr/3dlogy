@@ -1,4 +1,4 @@
-﻿namespace Application.Services.Dynamic
+﻿namespace Base.Persistence.Services.Dynamic
 {
     public class DynamicQuery
     {

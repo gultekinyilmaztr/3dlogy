@@ -1,8 +1,8 @@
-﻿using Application.Services.Repositories;
+﻿using Base.Persistence.Services.Repositories;
 
 namespace Domain.Entites
 {
-    public class Product : BaseEntity<Product>
+    public class Product : BaseEntity<Guid>
     {
         public string Name { get; set; }
         public string PhotoUrl { get; set; }

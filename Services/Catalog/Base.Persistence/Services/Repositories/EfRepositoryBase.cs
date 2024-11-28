@@ -1,5 +1,5 @@
-﻿using Application.Services.Dynamic;
-using Application.Services.Paging;
+﻿using Base.Persistence.Services.Dynamic;
+using Base.Persistence.Services.Paging;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Query;
@@ -7,7 +7,7 @@ using System.Collections;
 using System.Linq.Expressions;
 using System.Reflection;
 
-namespace Application.Services.Repositories
+namespace Base.Persistence.Services.Repositories
 {
     public class EfRepositoryBase<TEntity, TEntityId, TContext>
         : IAsyncRepository<TEntity, TEntityId>

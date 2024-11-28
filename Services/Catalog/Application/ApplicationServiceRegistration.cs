@@ -1,4 +1,4 @@
-﻿using Application.Services.Paging;
+﻿using Base.Persistence.Services.Paging;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;

@@ -1,9 +1,9 @@
-﻿using Application.Services.Dynamic;
-using Application.Services.Paging;
+﻿using Base.Persistence.Services.Dynamic;
+using Base.Persistence.Services.Paging;
 using Microsoft.EntityFrameworkCore.Query;
 using System.Linq.Expressions;
 
-namespace Application.Services.Repositories
+namespace Base.Persistence.Services.Repositories
 {
     public interface IAsyncRepository<TEntity, TEntityId> : IQuery<TEntity>
         where TEntity : BaseEntity<TEntityId>

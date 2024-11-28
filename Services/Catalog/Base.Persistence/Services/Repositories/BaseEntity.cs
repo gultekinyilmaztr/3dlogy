@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Services.Repositories
+namespace Base.Persistence.Services.Repositories
 {
     public class BaseEntity<TId> : IEntityTimestamps
     {

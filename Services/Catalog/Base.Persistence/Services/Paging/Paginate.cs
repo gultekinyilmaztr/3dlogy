@@ -1,4 +1,4 @@
-﻿namespace Application.Services.Paging
+﻿namespace Base.Persistence.Services.Paging
 {
     public class Paginate<T>
     {
