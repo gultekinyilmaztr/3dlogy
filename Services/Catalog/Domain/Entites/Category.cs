@@ -1,5 +1,4 @@
-﻿using Base.Persistence.Services.Repositories;
-using System.Xml.Linq;
+﻿using Base.Persistence.Repositories;
 
 namespace Domain.Entites
 {

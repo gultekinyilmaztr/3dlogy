@@ -1,4 +1,5 @@
-﻿using Base.Persistence.Services.Repositories;
+﻿using Base.Persistence.Repositories;
+using Domain.Enums;
 
 namespace Domain.Entites
 {
@@ -12,6 +13,9 @@ namespace Domain.Entites
         public bool? IsDiscounted { get; set; }
         public double? DiscountRate { get; set; }
         public DateTime? DiscountEndDate { get; set; }
+        public ProductState ProductState { get; set; }
+
+
 
     }
 }

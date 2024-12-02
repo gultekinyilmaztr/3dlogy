@@ -1,4 +1,4 @@
-﻿using Base.Persistence.Services.Repositories;
+﻿using Base.Persistence.Repositories;
 
 namespace Domain.Entites
 {

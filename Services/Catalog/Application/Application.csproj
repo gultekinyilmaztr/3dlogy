@@ -7,16 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Features\Categories\Commands\Delete\" />
-    <Folder Include="Features\Categories\Commands\Update\" />
-    <Folder Include="Features\Categories\Constants\" />
-    <Folder Include="Features\Categories\Rules\" />
-    <Folder Include="Features\Categories\Queries\" />
-    <Folder Include="Features\Categories\Profiles\" />
     <Folder Include="Features\Products\" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.0" />
     <PackageReference Include="MediatR" Version="12.4.1" />
     <PackageReference Include="Microsoft.Build.Framework" Version="17.12.6" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.0" />
@@ -24,6 +19,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Base.Application\Base.Application.csproj" />
+    <ProjectReference Include="..\Base.CrossCuttingConcerns\Base.CrossCuttingConcerns.csproj" />
     <ProjectReference Include="..\Domain\Domain.csproj" />
   </ItemGroup>
 
