@@ -14,7 +14,6 @@ namespace Persistence.EntityConfigurations
             builder.Property(b => b.Name).HasColumnName("Name").IsRequired();
             builder.Property(b => b.PhotoUrl).HasColumnName("PhotoUrl").IsRequired();
             builder.Property(b => b.Summary).HasColumnName("Summary").IsRequired();
-            builder.Property(b => b.SubCategoryIds).HasColumnName("SubCategoryIds").IsRequired();
             builder.Property(b => b.Price).HasColumnName("Price").IsRequired();
             builder.Property(b => b.DiscountRate).HasColumnName("DiscountRate");
             builder.Property(b => b.DiscountEndDate).HasColumnName("DiscountEndDate");

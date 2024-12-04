@@ -37,9 +37,6 @@ namespace Persistence.Migrations
                         .HasColumnType("datetime2")
                         .HasColumnName("DeletedDate");
 
-                    b.Property<Guid?>("ModelId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)")
@@ -50,8 +47,6 @@ namespace Persistence.Migrations
                         .HasColumnName("UpdatedDate");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ModelId");
 
                     b.HasIndex("Name")
                         .IsUnique();
@@ -106,8 +101,7 @@ namespace Persistence.Migrations
                         .HasColumnName("Id");
 
                     b.Property<Guid>("BrandId")
-                        .HasColumnType("uniqueidentifier")
-                        .HasColumnName("BrandId");
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2")
@@ -185,13 +179,11 @@ namespace Persistence.Migrations
                         .HasColumnType("int")
                         .HasColumnName("ProductState");
 
-                    b.Property<Guid?>("SubCategoryId")
+                    b.Property<Guid>("SubCategoryId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.PrimitiveCollection<string>("SubCategoryIds")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("SubCategoryIds");
+                    b.Property<Guid>("SubCategoyId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Summary")
                         .IsRequired()
@@ -271,12 +263,9 @@ namespace Persistence.Migrations
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("Id");
 
-                    b.Property<int>("CategoryId")
-                        .HasColumnType("int")
+                    b.Property<Guid>("CategoryId")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("CategoryId");
-
-                    b.Property<Guid>("CategoryId1")
-                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2")
@@ -307,19 +296,12 @@ namespace Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CategoryId1");
+                    b.HasIndex("CategoryId");
 
                     b.HasIndex(new[] { "SubCategoryName" }, "UK_SubCateogries_Name")
                         .IsUnique();
 
                     b.ToTable("SubCateogries", (string)null);
-                });
-
-            modelBuilder.Entity("Domain.Entites.Brand", b =>
-                {
-                    b.HasOne("Domain.Entites.Model", null)
-                        .WithMany("Brands")
-                        .HasForeignKey("ModelId");
                 });
 
             modelBuilder.Entity("Domain.Entites.Model", b =>
@@ -335,16 +317,20 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.Entites.Product", b =>
                 {
-                    b.HasOne("Domain.Entites.SubCategory", null)
+                    b.HasOne("Domain.Entites.SubCategory", "SubCategory")
                         .WithMany("Products")
-                        .HasForeignKey("SubCategoryId");
+                        .HasForeignKey("SubCategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("SubCategory");
                 });
 
             modelBuilder.Entity("Domain.Entites.SubCategory", b =>
                 {
                     b.HasOne("Domain.Entites.Category", "Category")
                         .WithMany("SubCategories")
-                        .HasForeignKey("CategoryId1")
+                        .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -359,11 +345,6 @@ namespace Persistence.Migrations
             modelBuilder.Entity("Domain.Entites.Category", b =>
                 {
                     b.Navigation("SubCategories");
-                });
-
-            modelBuilder.Entity("Domain.Entites.Model", b =>
-                {
-                    b.Navigation("Brands");
                 });
 
             modelBuilder.Entity("Domain.Entites.SubCategory", b =>

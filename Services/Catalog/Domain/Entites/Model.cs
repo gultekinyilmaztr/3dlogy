@@ -8,7 +8,6 @@ public class Model : BaseEntity<Guid>
     public string Name { get; set; }
     public string ImageUrl { get; set; }
     public virtual Brand? Brand { get; set; }
-    public virtual ICollection<Brand> Brands { get; set; }
 
 }
 
