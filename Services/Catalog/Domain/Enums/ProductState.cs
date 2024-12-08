@@ -2,8 +2,9 @@
 {
     public enum ProductState
     {
-        Available = 1,
-        NonAvailable = 2
+        Active = 1,
+        Inactive = 2,
+        Discontinued = 3
 
     }
 }

@@ -15,8 +15,9 @@ namespace Persistence.EntityConfigurations
         {
             services.AddDbContext<BaseDbContext>(options =>
                                                      options.UseSqlServer(
-                                                         configuration.GetConnectionString("3dlogyConnectionString")));
-            services.AddScoped<ICategoryRepository, CategoryRepository>();
+                                                         configuration.GetConnectionString("3dlogy"))); //3dlogyConnectionString
+            services.AddScoped<IBrandRepository, BrandRepository>();
+            services.AddScoped<IModelRepository, ModelRepository>();
 
 
             return services;

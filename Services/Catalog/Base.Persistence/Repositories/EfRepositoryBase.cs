@@ -139,51 +139,53 @@ namespace Base.Persistence.Repositories
             }
         }
 
-        private async Task setEntityAsSoftDeletedAsync(IEntityTimestamps entity) //nesneyi softdelete olarak siliyor.
+        private async Task setEntityAsSoftDeletedAsync(IEntityTimestamps entity)
         {
-            if (entity.DeletedDate.HasValue) //zaten silinmiş ise işlemi sonrandr.
-                return;
-            entity.DeletedDate = DateTime.UtcNow; //silindir tarihini gir
+            if (entity.DeletedDate.HasValue)
+                return; // Zaten silinmiş
+
+            entity.DeletedDate = DateTime.UtcNow;
+
             var navigations = _context
                 .Entry(entity)
                 .Metadata.GetNavigations()
                 .Where(x => x is { IsOnDependent: false, ForeignKey.DeleteBehavior: DeleteBehavior.ClientCascade or DeleteBehavior.Cascade })
                 .ToList();
-            foreach (INavigation? navigation in navigations) //nesneye bağlı ilişkileri bul.
+
+            foreach (INavigation? navigation in navigations)
             {
-                if (navigation.TargetEntityType.IsOwned())
+                if (navigation.TargetEntityType.IsOwned() || navigation.PropertyInfo == null)
                     continue;
-                if (navigation.PropertyInfo == null)
-                    continue;
-                object? navValue = navigation.PropertyInfo.GetValue(entity);
-                if (navigation.IsCollection)//Eğer ilişki bir koleksiyon ise (örneğin bir ürünün birden fazla yorumu varsa), her bir öğeyi tek tek soft delete yapar.
+
+                object? navValue = navigation.PropertyInfo?.GetValue(entity);
+                if (navValue == null)
                 {
-                    if (navValue == null)
-                    {
-                        await setEntityAsSoftDeletedAsync((IEntityTimestamps)navValue);//Eğer ilişki tekil bir nesne ise (örneğin bir siparişin tek bir müşterisi varsa), o nesneyi soft delete yapar.
-                        IQueryable query = _context.Entry(entity).Collection(navigation.PropertyInfo.Name).Query();
-                        navValue = await GetRelationLoaderQuery(query, navigationPropertyType: navigation.PropertyInfo.GetType()).ToListAsync();
-                        if (navValue == null)
-                            continue;
-                    }
-                    foreach (IEntityTimestamps navValueItem in (IEnumerable)navValue)
-                        await setEntityAsSoftDeletedAsync(navValueItem);
+                    IQueryable query = _context.Entry(entity)
+                                                .Collection(navigation.PropertyInfo.Name)
+                                                .Query();
+                    navValue = await GetRelationLoaderQuery(query, navigation.PropertyInfo.PropertyType).ToListAsync();
                 }
-                else
+
+                if (navValue is null)
+                    continue;
+
+                if (navigation.IsCollection)
                 {
-                    if (navValue == null)
+                    foreach (var navValueItem in (IEnumerable)navValue)
                     {
-                        IQueryable query = _context.Entry(entity).Reference(navigation.PropertyInfo.Name).Query();
-                        navValue = await GetRelationLoaderQuery(query, navigationPropertyType: navigation.PropertyInfo.GetType())
-                            .FirstOrDefaultAsync();
-                        if (navValue == null)
-                            continue;
+                        if (navValueItem is IEntityTimestamps item)
+                            await setEntityAsSoftDeletedAsync(item);
                     }
-                    await setEntityAsSoftDeletedAsync((IEntityTimestamps)navValue);
+                }
+                else if (navValue is IEntityTimestamps singleEntity)
+                {
+                    await setEntityAsSoftDeletedAsync(singleEntity);
                 }
             }
+
             _context.Update(entity);
         }
+
 
         protected IQueryable<object> GetRelationLoaderQuery(IQueryable query, Type navigationPropertyType)//Bir Product nesnesinin Reviews (yorumlar) ilişkisi var.Bu metod, yalnızca DeletedDate alanı boş olan (silinmemiş) yorumları getirir.Böylece, ilişkili veriler üzerinde "soft delete" işlemi düzgün çalışır.
         {

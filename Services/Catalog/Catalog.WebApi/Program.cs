@@ -1,7 +1,5 @@
 using Application;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Persistence.Context;
+using Base.CrossCuttingConcerns.Exceptions.Extensions;
 using Persistence.EntityConfigurations;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,21 +8,26 @@ var configuration = builder.Configuration;
 // Add services to the container.
 
 builder.Services.AddControllers();
-builder.Services.AddApplicationServices();
-builder.Services.AddPersistenceServices(builder.Configuration);
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-builder.Services.AddOpenApi();
 
-builder.Services.AddDbContext<BaseDbContext>(options =>
-    options.UseSqlServer(configuration.GetConnectionString("3dlogy")));
+builder.Services.AddApplicationServices();
+builder.Services.AddPersistenceServices(builder.Configuration);//ekledim.
+builder.Services.AddHttpContextAccessor();
+// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
+//builder.Services.AddOpenApi();
+builder.Services.AddSwaggerGen();//ekledim
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.MapOpenApi();
+    //app.MapOpenApi();
+    app.UseSwagger();//ekledim.
+    app.UseSwaggerUI();//ekledim
 }
+
+if (app.Environment.IsProduction())//ekledim.
+    app.ConfigureCustomExceptionMiddleware();//ekledim
 
 app.UseHttpsRedirection();
 

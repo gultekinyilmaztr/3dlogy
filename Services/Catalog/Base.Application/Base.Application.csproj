@@ -7,10 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Pipelines\" />
+    <PackageReference Include="FluentValidation" Version="11.11.0" />
+    <PackageReference Include="MediatR" Version="12.4.1" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Base.CrossCuttingConcerns\Base.CrossCuttingConcerns.csproj" />
     <ProjectReference Include="..\Base.Persistence\Base.Persistence.csproj" />
   </ItemGroup>
 

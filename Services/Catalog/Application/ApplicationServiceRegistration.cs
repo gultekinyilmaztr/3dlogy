@@ -1,5 +1,7 @@
-﻿using Base.Persistence.Paging;
-using Microsoft.EntityFrameworkCore;
+﻿using Base.Application.Pipelines.Transaction;
+using Base.Application.Pipelines.Validation;
+using Base.Application.Rules;
+using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 
@@ -10,33 +12,38 @@ namespace Application
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
+
+            services.AddSubClassesOfType(Assembly.GetExecutingAssembly(), typeof(BaseBusinessRules));
+
+            services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+
             services.AddMediatR(configuration =>
             {
                 configuration.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly());
-            });
-            return services;
 
+                configuration.AddOpenBehavior(typeof(RequestValidationBehavior<,>));
+                configuration.AddOpenBehavior(typeof(TransactionScopeBehavior<,>));
+
+            });
+
+            return services;
         }
 
-        public static async Task<Paginate<T>> ToPaganateAsync<T>(
-            this IQueryable<T> source,
-            int index,
-            int size,
-            CancellationToken cancellationToken = default
-        )
+        public static IServiceCollection AddSubClassesOfType(
+           this IServiceCollection services,
+           Assembly assembly,
+           Type type,
+           Func<IServiceCollection, Type, IServiceCollection>? addWithLifeCycle = null
+       )
         {
-            int count = await source.CountAsync(cancellationToken).ConfigureAwait(false);
-            List<T> items = await source.Skip(index * size).Take(size).ToListAsync(cancellationToken).ConfigureAwait(false);
+            var types = assembly.GetTypes().Where(t => t.IsSubclassOf(type) && type != t).ToList();
+            foreach (var item in types)
+                if (addWithLifeCycle == null)
+                    services.AddScoped(item);
 
-            Paginate<T> list = new()
-            {
-                Index = index,
-                Count = count,
-                Items = items,
-                Size = size,
-                Pages = (int)Math.Ceiling(count / (double)size)
-            };
-            return list;
+                else
+                    addWithLifeCycle(services, type);
+            return services;
         }
     }
 
