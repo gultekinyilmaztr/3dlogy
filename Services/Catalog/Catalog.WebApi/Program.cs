@@ -12,6 +12,8 @@ builder.Services.AddControllers();
 builder.Services.AddApplicationServices();
 builder.Services.AddPersistenceServices(builder.Configuration);//ekledim.
 builder.Services.AddHttpContextAccessor();
+builder.Services.AddStackExchangeRedisCache(opt => opt.Configuration = "localhost:6379");
+//builder.Services.AddDistributedMemoryCache();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 //builder.Services.AddOpenApi();
 builder.Services.AddSwaggerGen();//ekledim

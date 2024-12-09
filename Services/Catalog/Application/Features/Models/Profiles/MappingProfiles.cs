@@ -1,7 +1,4 @@
-﻿using Application.Features.Brands.Commands.Delete;
-using Application.Features.Brands.Commands.Update;
-using Application.Features.Categories.Commands.Create;
-using Application.Features.Models.Commands.Create;
+﻿using Application.Features.Models.Commands.Create;
 using Application.Features.Models.Commands.Delete;
 using Application.Features.Models.Commands.Update;
 using Application.Features.Models.Queries.GetList;

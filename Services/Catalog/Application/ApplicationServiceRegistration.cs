@@ -1,4 +1,5 @@
-﻿using Base.Application.Pipelines.Transaction;
+﻿using Base.Application.Pipelines.Caching;
+using Base.Application.Pipelines.Transaction;
 using Base.Application.Pipelines.Validation;
 using Base.Application.Rules;
 using FluentValidation;
@@ -23,6 +24,8 @@ namespace Application
 
                 configuration.AddOpenBehavior(typeof(RequestValidationBehavior<,>));
                 configuration.AddOpenBehavior(typeof(TransactionScopeBehavior<,>));
+                configuration.AddOpenBehavior(typeof(CachingBehavior<,>));
+                configuration.AddOpenBehavior(typeof(CacheRemovingBehavior<,>));
 
             });
 
