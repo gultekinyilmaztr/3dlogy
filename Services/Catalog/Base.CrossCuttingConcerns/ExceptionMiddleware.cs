@@ -8,7 +8,7 @@ namespace Base.CrossCuttingConcerns;
 
 public class ExceptionMiddleware
 {
-   
+
     private readonly RequestDelegate _next;
     private readonly HttpExceptionHandler _httpExceptionHandler;
     private readonly IHttpContextAccessor _contextAccessor;

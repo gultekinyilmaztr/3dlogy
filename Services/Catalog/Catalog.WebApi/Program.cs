@@ -1,11 +1,20 @@
 using Application;
 using Base.CrossCuttingConcerns.Exceptions.Extensions;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.Extensions.Options;
 using Persistence.EntityConfigurations;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.AddServiceDefaults();
 
 var configuration = builder.Configuration;
 // Add services to the container.
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(opt =>
+{
+    opt.Authority = builder.Configuration["IdentityURL"];
+    opt.Audience = "ResourceCatalog";
+});
 
 builder.Services.AddControllers();
 
@@ -30,10 +39,11 @@ if (app.Environment.IsDevelopment())
 }
 
 //if (app.Environment.IsProduction())//ekledim.
-    app.ConfigureCustomExceptionMiddleware();//ekledim
+app.ConfigureCustomExceptionMiddleware();//ekledim
 
+app.MapDefaultEndpoints();
 app.UseHttpsRedirection();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

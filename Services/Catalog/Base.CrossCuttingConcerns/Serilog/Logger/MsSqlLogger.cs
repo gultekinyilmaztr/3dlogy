@@ -3,11 +3,6 @@ using Base.CrossCuttingConcerns.Serilog.Messages;
 using Microsoft.Extensions.Configuration;
 using Serilog;
 using Serilog.Sinks.MSSqlServer;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Base.CrossCuttingConcerns.Serilog.Logger
 {
