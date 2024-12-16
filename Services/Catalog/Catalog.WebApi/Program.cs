@@ -1,7 +1,6 @@
 using Application;
 using Base.CrossCuttingConcerns.Exceptions.Extensions;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.Extensions.Options;
 using Persistence.EntityConfigurations;
 
 var builder = WebApplication.CreateBuilder(args);

@@ -3,12 +3,11 @@ using Application.Features.Models.Queries.GetListByDynamic;
 using Base.Application.Requests;
 using Base.Application.Responses;
 using Base.Persistence.Dynamic;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Catalog.WebApi.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ModelsController : BaseController

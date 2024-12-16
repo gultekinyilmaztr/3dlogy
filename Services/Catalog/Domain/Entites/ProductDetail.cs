@@ -4,13 +4,12 @@ namespace Domain.Entites
 {
     public class ProductDetail : BaseEntity<Guid>
     {
-        public string Title { get; set; }
-        public List<string> Pictures { get; set; }
-        public string Description { get; set; }
-        public string Format { get; set; }
-        public DateTime PublicationDate { get; set; }
-        public DateTime ManufactureDate { get; set; }
         public Guid ProductId { get; set; }
+        public virtual Product Product { get; set; }
+        public string AdditionalInfo { get; set; }
+        public string ImageURL { get; set; }
+        public string VideoURL { get; set; }
+
 
     }
 }

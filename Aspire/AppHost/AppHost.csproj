@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Services\Catalog\Catalog.WebApi\Catalog.WebApi.csproj" />
+    <ProjectReference Include="..\..\Services\Filter.WebApi\Filter.WebApi.csproj" />
     <ProjectReference Include="..\..\Services\Identity\Identity.API\Identity.API.csproj" />
   </ItemGroup>
 

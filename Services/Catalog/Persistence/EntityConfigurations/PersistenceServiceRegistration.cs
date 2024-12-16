@@ -18,6 +18,8 @@ namespace Persistence.EntityConfigurations
                                                          configuration.GetConnectionString("3dlogy"))); //3dlogyConnectionString
             services.AddScoped<IBrandRepository, BrandRepository>();
             services.AddScoped<IModelRepository, ModelRepository>();
+            services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<ISubCategoryRepository, SubCategoryRepository>();
 
 
             return services;

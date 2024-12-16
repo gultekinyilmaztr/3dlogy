@@ -42,7 +42,7 @@ internal static class HostingExtensions
                 .AddProfileService<CustomProfileService>()
                 .AddDeveloperSigningCredential();
 
-        
+
 
         builder.Services.AddControllers();
 
@@ -76,7 +76,7 @@ internal static class HostingExtensions
         app.UseIdentityServer();
         app.UseAuthentication();
         app.UseAuthorization();
-        
+
         app.MapControllers();
 
         return app;

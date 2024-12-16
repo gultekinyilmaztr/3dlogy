@@ -21,8 +21,9 @@ namespace Persistence.EntityConfigurations
             builder.HasIndex(m => m.Name).IsUnique();
 
             builder.HasOne(m => m.Brand)
-                   .WithMany(b => b.Models)
-                   .HasForeignKey(m => m.BrandId);
+              .WithMany(b => b.Models)
+              .HasForeignKey(m => m.BrandId)
+              .OnDelete(DeleteBehavior.SetNull);  // Brand silindiğinde, Model bilgisi null olur, ancak silinmez.
 
             builder.HasQueryFilter(m => !m.DeletedDate.HasValue);
         }

@@ -8,7 +8,7 @@ using System.Security.Claims;
 
 namespace Identity.API.Services
 {
-    public class CustomProfileService:IProfileService
+    public class CustomProfileService : IProfileService
     {
         private readonly UserManager<ApplicationUser> _userManager;
 

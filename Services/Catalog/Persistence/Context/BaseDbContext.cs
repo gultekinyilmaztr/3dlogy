@@ -14,6 +14,9 @@ namespace Persistence.Context
         public DbSet<SubCategory> SubCategories { get; set; }
         public DbSet<Brand> Brands { get; set; }
         public DbSet<Model> Models { get; set; }
+        public DbSet<ProductTag> ProductTags { get; set; }
+        public DbSet<Tag> Tags { get; set; }
+        public DbSet<ProductImage> ProductImages { get; set; }
 
 
         public BaseDbContext(DbContextOptions dbContextOptions, IConfiguration configuration) : base(dbContextOptions)

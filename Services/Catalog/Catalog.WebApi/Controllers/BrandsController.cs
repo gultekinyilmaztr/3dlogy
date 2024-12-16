@@ -5,11 +5,10 @@ using Application.Features.Brands.Queries.GetList;
 using Application.Features.Categories.Commands.Create;
 using Base.Application.Requests;
 using Base.Application.Responses;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Catalog.WebApi.Controllers;
-[Authorize]
+//[Authorize]
 [Route("api/[controller]")]
 [ApiController]
 public class BrandsController : BaseController

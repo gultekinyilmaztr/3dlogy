@@ -5,11 +5,10 @@ namespace Domain.Entites
     public class SubCategory : BaseEntity<Guid>
     {
         public string SubCategoryName { get; set; }
-        public string PhotoUrl { get; set; }
         public string IconUrl { get; set; }
         public Guid CategoryId { get; set; }
-        public Category Category { get; set; }
-        public ICollection<Product> Products { get; set; }
+        public virtual Category Category { get; set; }
+        public virtual ICollection<Product> Products { get; set; } = new List<Product>();
 
     }
 }
