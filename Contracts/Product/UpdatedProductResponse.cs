@@ -1,4 +1,4 @@
-﻿namespace Application.Features.Products.Commands.Update
+﻿namespace Contracts.Product
 {
     public class UpdatedProductResponse
     {
@@ -10,15 +10,12 @@
         public bool IsNew { get; set; }
         public bool IsAvailable { get; set; }
         public string Condition { get; set; }
-        public Guid SubCategoryId { get; set; }
+        public Guid? SubCategoryId { get; set; }
         public string Manufacturer { get; set; }
-        public Guid? SellerId { get; set; }
         public bool IsFeatured { get; set; }
         public decimal? DiscountPrice { get; set; }
         public int ViewCount { get; set; }
         public Guid? BrandId { get; set; }
         public Guid? ModelId { get; set; }
-        public DateTime CreatedDate { get; set; }
-        public DateTime UpdatedDate { get; set; }
     }
 }

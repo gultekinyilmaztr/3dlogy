@@ -1,5 +1,6 @@
 ﻿using Application.Services.Repositories;
 using AutoMapper;
+using Contracts.Model;
 using Domain.Entites;
 using MediatR;
 

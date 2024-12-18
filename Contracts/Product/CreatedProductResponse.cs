@@ -1,4 +1,4 @@
-﻿namespace Application.Features.Products.Commands.Create
+﻿namespace Contracts.Product
 {
     public class CreatedProductResponse
     {
@@ -10,14 +10,12 @@
         public bool IsNew { get; set; }
         public bool IsAvailable { get; set; }
         public string Condition { get; set; }
+        public Guid? SubCategoryId { get; set; }
         public string Manufacturer { get; set; }
         public bool IsFeatured { get; set; }
         public decimal? DiscountPrice { get; set; }
         public int ViewCount { get; set; }
-        public string BrandName { get; set; }
-        public string ModelName { get; set; }
-        public string SubCategoryName { get; set; }
-        public DateTime CreatedDate { get; set; }
-
+        public Guid? BrandId { get; set; }
+        public Guid? ModelId { get; set; }
     }
 }

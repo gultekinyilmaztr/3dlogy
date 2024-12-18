@@ -14,9 +14,9 @@
         public bool IsFeatured { get; set; }
         public decimal? DiscountPrice { get; set; }
         public int ViewCount { get; set; }
-        public string BrandName { get; set; }
-        public string ModelName { get; set; }
-        public string SubCategoryName { get; set; }
+        public Guid? BrandId { get; set; }
+        public Guid? ModelId { get; set; }
+        public Guid? SubCategoryId { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime? UpdatedDate { get; set; }
         public DateTime? DeletedDate { get; set; }

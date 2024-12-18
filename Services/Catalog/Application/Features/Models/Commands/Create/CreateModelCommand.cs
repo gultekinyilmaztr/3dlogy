@@ -4,6 +4,8 @@ using AutoMapper;
 using Base.Application.Pipelines.Transaction;
 using Domain.Entites;
 using MediatR;
+using Contracts.Product;
+using Contracts.Model;
 
 namespace Application.Features.Models.Commands.Create;
 

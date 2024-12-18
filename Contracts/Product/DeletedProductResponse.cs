@@ -1,4 +1,4 @@
-﻿namespace Application.Features.Products.Commands.Delete
+﻿namespace Contracts.Product
 {
     public class DeletedProductResponse
     {

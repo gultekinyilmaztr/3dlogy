@@ -4,6 +4,7 @@ using AutoMapper;
 using Base.Application.Pipelines.Caching;
 using Base.Application.Pipelines.Logging;
 using Base.Application.Pipelines.Transaction;
+using Contracts.Product;
 using Domain.Entites;
 using MediatR;
 
@@ -11,7 +12,6 @@ namespace Application.Features.Products.Commands.Create
 {
     public class CreateProductCommand : IRequest<CreatedProductResponse>, ITransactionalRequest, ICacheRemoverRequest, ILoggableRequest
     {
-        public Guid Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public decimal Price { get; set; }
@@ -23,9 +23,9 @@ namespace Application.Features.Products.Commands.Create
         public bool IsFeatured { get; set; }
         public decimal? DiscountPrice { get; set; }
         public int ViewCount { get; set; }
-        public string BrandName { get; set; }
-        public string ModelName { get; set; }
-        public string SubCategoryName { get; set; }
+        public Guid? BrandId { get; set; }
+        public Guid? ModelId { get; set; }
+        public Guid? SubCategoryId { get; set; }
 
         public string? CacheKey => "";
 

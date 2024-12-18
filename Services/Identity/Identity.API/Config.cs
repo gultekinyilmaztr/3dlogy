@@ -8,6 +8,7 @@ public static class Config
     public static IEnumerable<ApiResource> ApiResources => new ApiResource[]
         {
            new ApiResource("ResourceCatalog"){Scopes={"CatalogFullPermission","CatalogReadPermission"} },
+           new ApiResource("ResourceOcelot"){Scopes={"OcelotFullPermission"} },
            new ApiResource(IdentityServerConstants.LocalApi.ScopeName)
         };
 
@@ -22,6 +23,7 @@ public static class Config
     {
             new ApiScope("CatalogFullPermission","Full authority for catalog operations"),
             new ApiScope("CatalogReadPermission","Reading authority for catalog operations"),
+            new ApiScope("OcelotFullPermission","Reading authority for ocelot operations"),
             new ApiScope(IdentityServerConstants.LocalApi.ScopeName)
     };
 
@@ -34,7 +36,7 @@ public static class Config
                 ClientName="Visitor Client",
                 AllowedGrantTypes=GrantTypes.ClientCredentials,
                 ClientSecrets={new Secret("DuendeVisitorClientSecret".Sha256())},
-                AllowedScopes={ "CatalogReadPermission",  IdentityServerConstants.LocalApi.ScopeName },
+                AllowedScopes={ "CatalogReadPermission", "OcelotFullPermission",  IdentityServerConstants.LocalApi.ScopeName },
                 AllowAccessTokensViaBrowser=true
             },
 
@@ -45,7 +47,7 @@ public static class Config
                 ClientName="Admin Client",
                 AllowedGrantTypes=GrantTypes.ResourceOwnerPassword,
                 ClientSecrets={new Secret("DuendeAdminClientSecret".Sha256()) },
-                AllowedScopes={"CatalogFullPermission", "CatalogReadPermission",
+                AllowedScopes={"CatalogFullPermission", "CatalogReadPermission", "OcelotFullPermission",
                 IdentityServerConstants.LocalApi.ScopeName,
                 IdentityServerConstants.StandardScopes.Email,
                 IdentityServerConstants.StandardScopes.OpenId,

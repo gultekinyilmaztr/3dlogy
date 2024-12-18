@@ -3,9 +3,13 @@ using Application.Features.Products.Commands.Delete;
 using Application.Features.Products.Commands.Update;
 using Application.Features.Products.Queries.GetById;
 using Application.Features.Products.Queries.GetList;
+using Application.Features.Products.Queries.GetListByDynamic;
 using AutoMapper;
 using Base.Application.Responses;
 using Base.Persistence.Paging;
+using Contracts.Product;
+using DocumentFormat.OpenXml.Drawing;
+using DocumentFormat.OpenXml.Wordprocessing;
 using Domain.Entites;
 
 namespace Application.Features.Products.Profiles
@@ -23,9 +27,34 @@ namespace Application.Features.Products.Profiles
             CreateMap<Product, DeleteProductCommand>().ReverseMap();
             CreateMap<Product, DeletedProductResponse>().ReverseMap();
 
-            CreateMap<Product, GetListProductListItemDto>().ReverseMap();
-            CreateMap<Product, GetByIdProductResponse>().ReverseMap();
+            CreateMap<Product, GetByIdProductResponse>().ReverseMap();//??
+
+
+
+            CreateMap<Product, GetListProductListItemDto>()//brandıd yerine name geliyor normalde..
+                .ForMember(destinationMember: c => c.Id, memberOptions: opt => opt.MapFrom(c => c.Brand.Name))
+                .ReverseMap();
+            CreateMap<Product, GetListProductListItemDto>()
+               .ForMember(destinationMember: c => c.BrandId, memberOptions: opt => opt.MapFrom(c => c.Model.Name))
+               .ReverseMap();
+            CreateMap<Product, GetListProductListItemDto>()
+               .ForMember(destinationMember: c => c.SubCategoryId, memberOptions: opt => opt.MapFrom(c => c.SubCategory.SubCategoryName))
+               .ReverseMap();
+
+
+            CreateMap<Product, GetListByDynamicProductListItemDto>()//brandıd yerine name geliyor normalde..
+                .ForMember(destinationMember: c => c.BrandId, memberOptions: opt => opt.MapFrom(c => c.Brand.Name))
+                .ReverseMap();
+            CreateMap<Product, GetListByDynamicProductListItemDto>()
+               .ForMember(destinationMember: c => c.ModelId, memberOptions: opt => opt.MapFrom(c => c.Model.Name))
+               .ReverseMap();
+            CreateMap<Product, GetListByDynamicProductListItemDto>()
+               .ForMember(destinationMember: c => c.SubCategoryId, memberOptions: opt => opt.MapFrom(c => c.SubCategory.SubCategoryName))
+               .ReverseMap();
+
+
             CreateMap<Paginate<Product>, GetListResponse<GetListProductListItemDto>>().ReverseMap();
+            CreateMap<Paginate<Product>, GetListResponse<GetListByDynamicProductListItemDto>>().ReverseMap();
         }
     }
 }

@@ -6,6 +6,7 @@ using Application.Features.Models.Queries.GetListByDynamic;
 using AutoMapper;
 using Base.Application.Responses;
 using Base.Persistence.Paging;
+using Contracts.Model;
 using Domain.Entites;
 
 namespace Application.Features.Models.Profiles

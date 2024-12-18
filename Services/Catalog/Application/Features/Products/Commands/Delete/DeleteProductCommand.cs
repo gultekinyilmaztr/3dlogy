@@ -1,6 +1,7 @@
 ﻿using Application.Services.Repositories;
 using AutoMapper;
 using Base.Application.Pipelines.Caching;
+using Contracts.Product;
 using Domain.Entites;
 using MediatR;
 

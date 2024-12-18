@@ -1,4 +1,4 @@
-namespace Filter.WebApi;
+namespace RapidApiWebUI;
 
 public class WeatherForecast
 {

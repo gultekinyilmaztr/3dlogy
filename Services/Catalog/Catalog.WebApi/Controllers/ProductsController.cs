@@ -3,8 +3,11 @@ using Application.Features.Products.Commands.Delete;
 using Application.Features.Products.Commands.Update;
 using Application.Features.Products.Queries.GetById;
 using Application.Features.Products.Queries.GetList;
+using Application.Features.Products.Queries.GetListByDynamic;
 using Base.Application.Requests;
 using Base.Application.Responses;
+using Base.Persistence.Dynamic;
+using Contracts.Product;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Catalog.WebApi.Controllers
@@ -25,6 +28,14 @@ namespace Catalog.WebApi.Controllers
         {
             GetListProductQuery getListProductQuery = new() { PageRequest = pageRequest };
             GetListResponse<GetListProductListItemDto> response = await Mediator.Send(getListProductQuery);
+            return Ok(response);
+        }
+
+        [HttpPost("GetList/ByDynamic")]
+        public async Task<IActionResult> GetListByDynamic([FromQuery] PageRequest pageRequest, [FromBody] DynamicQuery? dynamicQuery = null)
+        {
+            GetListByDynamicProductQuery getListByDynamicProductQuery = new() { PageRequest = pageRequest, DynamicQuery = dynamicQuery };
+            GetListResponse<GetListByDynamicProductListItemDto> response = await Mediator.Send(getListByDynamicProductQuery);
             return Ok(response);
         }
 

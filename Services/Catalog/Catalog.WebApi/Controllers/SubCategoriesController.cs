@@ -1,5 +1,4 @@
-﻿using Application.Features.Brands.Queries.GetList;
-using Application.Features.SubCategories.Commands.Create;
+﻿using Application.Features.SubCategories.Commands.Create;
 using Application.Features.SubCategories.Commands.Delete;
 using Application.Features.SubCategories.Commands.Update;
 using Application.Features.SubCategories.Queries.GetById;

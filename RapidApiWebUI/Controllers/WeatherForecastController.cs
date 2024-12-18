@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace Filter.WebApi.Controllers;
+namespace RapidApiWebUI.Controllers;
 
 [ApiController]
 [Route("[controller]")]
